@@ -6,13 +6,14 @@
     <!-- 登录表单 -->
     <van-form @submit="onSubmit">
         <van-field
+        v-model="user.mobile"
         name="用户名"
         placeholder="请输入手机号"
         >
         <i slot="left-icon" class="toutiao toutiao--shouji"></i>
         </van-field>
         <van-field
-        type="password"
+        v-model="user.code"
         name="验证码"
         placeholder="请输入验证码"
         >
@@ -32,14 +33,17 @@
   </template>
 
 <script>
+import { login } from '@/api/user'
 export default {
   name: 'LoginPage',
   components: {},
   props: {},
   data () {
     return {
-      username: '',
-      password: ''
+      user: {
+        mobile: '',
+        code: ''
+      }
     }
   },
   computed: {},
@@ -47,8 +51,18 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    onSubmit (values) {
-      console.log('submit', values)
+    async onSubmit () {
+      const user = this.user
+      try {
+        const res = await login(user)
+        console.log('登录成功', res)
+      } catch (err) {
+        if (err.response.status === 400) {
+          console.log('手机号或验证码错误', err)
+        } else {
+          console.log('登录失败，请稍后重试', err)
+        }
+      }
     }
   }
 }
