@@ -2,7 +2,7 @@
     <div class="login-container">
         <!-- 导航栏 -->
         <van-nav-bar class="page-nav-bar" title="登录">
-          <van-icon id="van-icon" slot="left" name="cross" @click="$router.back()"/>
+          <van-icon slot="left" name="cross" @click="$router.back()"/>
         </van-nav-bar>
         <!-- /导航栏 -->
     <!-- 登录表单 -->
@@ -165,8 +165,8 @@ export default {
       border: none;
     }
   }
+  .van-icon{
+    color: #fff;
+  }
 }
-// .van-icon{
-//   color: #ededed;
-// }
 </style>
